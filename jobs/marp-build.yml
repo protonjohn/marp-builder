@@ -1,8 +1,7 @@
 .marp_build:
   variables:
     MARP_BUILD_DIR: public/marp/build
-  image:
-    - $CI_REGISTRY/jbiggs/marp-builder:latest
+  image: $CI_REGISTRY/jbiggs/marp-builder:latest
   script: |
     mkdir -p "$MARP_BUILD_DIR"
     cp ${MARP_FILES:-*.md} "$MARP_BUILD_DIR"
