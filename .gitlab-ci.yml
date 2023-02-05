@@ -3,13 +3,17 @@
     MARP_BUILD_DIR: public/marp/build
   image:
     - $CI_REGISTRY/jbiggs/marp-builder:latest
-  script:
-    - mkdir -p "$MARP_BUILD_DIR"
-    - cp ${MARP_FILES:-*.md} "$MARP_BUILD_DIR"
-    - (cd "$MARP_BUILD_DIR" && marp ${MARP_FILES:-*.md})
-    - mv "$MARP_BUILD_DIR"/*.html "$MARP_BUILD_DIR"/..
-    - [ ! -d "${MARP_ASSETS_DIR:-assets}" ] || mv "${MARP_ASSETS_DIR:-assets}" "$MARP_BUILD_DIR"/..
-    - rm -rf "$MARP_BUILD_DIR"
+  script: |
+    mkdir -p "$MARP_BUILD_DIR"
+    cp ${MARP_FILES:-*.md} "$MARP_BUILD_DIR"
+    pushd "$MARP_BUILD_DIR"
+
+    marp ${MARP_FILES:-*.md}
+    mv *.html ..
+    popd
+
+    [ ! -d "${MARP_ASSETS_DIR:-assets}" ] || mv "${MARP_ASSETS_DIR:-assets}" "$MARP_BUILD_DIR"/..
+    rm -rf "$MARP_BUILD_DIR"
   artifacts:
     paths:
       - public
