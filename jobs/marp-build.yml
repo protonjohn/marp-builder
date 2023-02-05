@@ -8,7 +8,7 @@
     cp ${MARP_FILES:-*.md} "$MARP_BUILD_DIR"
     cd "$MARP_BUILD_DIR"
 
-    marp ${MARP_FILES:-*.md}
+    marp --html true ${MARP_FILES:-*.md}
     mv *.html ..
     cd "$BUILD_DIR"
 
