@@ -1,6 +1,6 @@
 .marp_build:
   variables:
-    MARP_BUILD_DIR: public/marp/build
+    MARP_BUILD_DIR: public/build
   image: $CI_REGISTRY/jbiggs/marp-builder:latest
   script: |
     BUILD_DIR="$(pwd)"
